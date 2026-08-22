@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Patient List</title>
+    <h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body>
+
+    <h1 style="text-align:center; color:#117864; font-family: Arial, sans-serif;">
+        Registered Patients
+    </h1>
+
+    <h:form>
+        <h:dataTable value="#{patientBean.patients}" var="p"
+                     styleClass="patient-table"
+                     headerClass="table-header"
+                     rowClasses="table-row-odd,table-row-even">
+            <h:column>
+                <f:facet name="header">First Name</f:facet>
+                #{p.firstName}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Last Name</f:facet>
+                #{p.lastName}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Date of Birth</f:facet>
+                <h:outputText value="#{p.dob}">
+                    <f:convertDateTime type="localDate" pattern="yyyy-MM-dd" />
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Amount</f:facet>
+                <h:outputText value="#{p.amount}">
+                    <f:convertNumber type="currency" currencySymbol="$" />
+                </h:outputText>
+            </h:column>
+        </h:dataTable>
+
+        <br/>
+        <h:link outcome="registration" value="Register Another Patient" />
+    </h:form>
+
+</h:body>
+</html>
