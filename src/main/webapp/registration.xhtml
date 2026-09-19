@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Patient Registration</title>
+
+    <!-- 1. EXTERNAL CSS -->
+    <h:outputStylesheet library="css" name="style.css" />
+
+    <!-- 2. INTERNAL CSS -->
+    <style>
+        .registration-form {
+            background-color: #f4f8fb;
+            border: 1px solid #d0dbe4;
+            border-radius: 8px;
+            padding: 24px;
+            max-width: 420px;
+            margin: 40px auto;
+        }
+        .registration-form label {
+            display: block;
+            margin-top: 12px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .registration-form input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+            box-sizing: border-box;
+        }
+    </style>
+</h:head>
+<h:body>
+
+    <!-- 3. INLINE CSS -->
+    <h1 style="text-align:center; color:#1a5276; font-family: Arial, sans-serif;">
+        Patient Registration
+    </h1>
+
+    <h:form styleClass="registration-form">
+        <h:messages style="color:red; display:block; margin-bottom:10px;" />
+
+        <h:outputLabel for="firstName" value="First Name" />
+        <h:inputText id="firstName" value="#{patientBean.firstName}"
+                     required="true" requiredMessage="First name is required" />
+
+        <h:outputLabel for="lastName" value="Last Name" />
+        <h:inputText id="lastName" value="#{patientBean.lastName}"
+                     required="true" requiredMessage="Last name is required" />
+
+        <h:outputLabel for="dob" value="Date of Birth (yyyy-MM-dd)" />
+        <h:inputText id="dob" value="#{patientBean.dob}"
+                     required="true" requiredMessage="Date of birth is required">
+            <f:convertDateTime type="localDate" pattern="yyyy-MM-dd" />
+        </h:inputText>
+
+        <h:outputLabel for="amount" value="Amount" />
+        <h:inputText id="amount" value="#{patientBean.amount}"
+                     required="true" requiredMessage="Amount is required">
+            <f:convertNumber type="number" />
+        </h:inputText>
+
+        <br/><br/>
+        <h:commandButton value="Register" action="#{patientBean.register}" />
+        <h:link outcome="patients" value="View Patient List" style="margin-left:12px;" />
+    </h:form>
+
+</h:body>
+</html>
