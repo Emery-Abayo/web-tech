@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Wellbeing Records — Wellbeing System</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<header>
+  <h1>Student Wellbeing System</h1>
+  <nav>
+    <a href="index.html">Dashboard</a>
+    <a href="students.html">Students</a>
+    <a href="discipline-records.html">Discipline Records</a>
+    <a href="wellbeing-records.html" class="active">Wellbeing Records</a>
+  </nav>
+</header>
+
+<main>
+  <div id="banner" class="banner" style="display:none;"></div>
+
+  <div class="toolbar">
+    <h2 style="margin:0;">Wellbeing Records</h2>
+    <button id="add-record-btn">+ Add Record</button>
+  </div>
+
+  <div id="state-box" style="display:none;"></div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th><th>Student</th><th>Date</th><th>Concern</th><th>Risk</th><th>Follow-up</th><th>Status</th><th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="record-rows"></tbody>
+  </table>
+</main>
+
+<!-- Create / Edit modal -->
+<div id="modal-backdrop" class="modal-backdrop" style="display:none;">
+  <div class="modal">
+    <h2 id="modal-title">Add Wellbeing Record</h2>
+    <form id="record-form" novalidate>
+      <div class="field">
+        <label for="studentId">Student</label>
+        <select id="studentId" name="studentId" required>
+          <option value="">Select student...</option>
+        </select>
+        <div id="err-studentId" class="field-error"></div>
+      </div>
+      <div class="field">
+        <label for="checkDate">Check-in Date</label>
+        <input id="checkDate" name="checkDate" type="date" required />
+        <div id="err-checkDate" class="field-error"></div>
+      </div>
+      <div class="field">
+        <label for="concernType">Concern Type</label>
+        <input id="concernType" name="concernType" required maxlength="50" />
+        <div id="err-concernType" class="field-error"></div>
+      </div>
+      <div class="field">
+        <label for="notes">Notes</label>
+        <input id="notes" name="notes" maxlength="255" />
+        <div id="err-notes" class="field-error"></div>
+      </div>
+      <div class="field">
+        <label for="riskLevel">Risk Level</label>
+        <select id="riskLevel" name="riskLevel" required>
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+        </select>
+        <div id="err-riskLevel" class="field-error"></div>
+      </div>
+      <div class="field">
+        <label style="display:flex; align-items:center; gap:0.5rem; cursor:pointer;">
+          <input id="followUpRequired" name="followUpRequired" type="checkbox" style="width:auto;" />
+          Follow-up required
+        </label>
+        <div id="follow-up-note" style="display:none; color:var(--warn); font-size:0.78rem; margin-top:0.25rem;">
+          High risk always forces follow-up — the server ignores this checkbox when Risk Level is High.
+        </div>
+        <div id="err-followUpRequired" class="field-error"></div>
+      </div>
+      <div class="field">
+        <label for="status">Status</label>
+        <select id="status" name="status" required>
+          <option value="Open">Open</option>
+          <option value="Resolved">Resolved</option>
+        </select>
+        <div id="err-status" class="field-error"></div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" id="cancel-btn" class="secondary">Cancel</button>
+        <button type="submit">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Delete confirmation -->
+<div id="delete-backdrop" class="modal-backdrop" style="display:none;">
+  <div class="modal">
+    <h2>Delete this record?</h2>
+    <p style="color:var(--text-dim); font-size:0.9rem;">This cannot be undone.</p>
+    <div class="modal-actions">
+      <button type="button" id="cancel-delete-btn" class="secondary">Cancel</button>
+      <button type="button" id="confirm-delete-btn" class="danger">Delete</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/wellbeing-records.js"></script>
+</body>
+</html>

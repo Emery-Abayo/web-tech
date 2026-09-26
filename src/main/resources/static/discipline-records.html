@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Discipline Records — Wellbeing System</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<header>
+  <h1>Student Wellbeing System</h1>
+  <nav>
+    <a href="index.html">Dashboard</a>
+    <a href="students.html">Students</a>
+    <a href="discipline-records.html" class="active">Discipline Records</a>
+    <a href="wellbeing-records.html">Wellbeing Records</a>
+  </nav>
+</header>
+
+<main>
+  <div id="banner" class="banner" style="display:none;"></div>
+
+  <div class="toolbar">
+    <h2 style="margin:0;">Discipline Records</h2>
+    <button id="add-record-btn">+ Add Record</button>
+  </div>
+
+  <div style="background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:0.9rem 1.1rem; margin-bottom:1rem; display:flex; align-items:center; gap:0.8rem;">
+    <label for="score-student-select" style="font-size:0.85rem; color:var(--text-dim);">Total points for student:</label>
+    <select id="score-student-select" style="flex:1; max-width:280px; padding:0.4rem 0.5rem; background:var(--bg); border:1px solid var(--border); border-radius:6px; color:var(--text);">
+      <option value="">Select student...</option>
+    </select>
+    <strong id="score-value" style="color:var(--accent); font-size:1.1rem;">—</strong>
+  </div>
+
+  <div id="state-box" style="display:none;"></div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th><th>Student</th><th>Date</th><th>Fault</th><th>Punishment</th><th>Points</th><th>Status</th><th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="record-rows"></tbody>
+  </table>
+</main>
+
+<!-- Create / Edit modal -->
+<div id="modal-backdrop" class="modal-backdrop" style="display:none;">
+  <div class="modal">
+    <h2 id="modal-title">Add Discipline Record</h2>
+    <form id="record-form" novalidate>
+      <div class="field">
+        <label for="studentId">Student</label>
+        <select id="studentId" name="studentId" required>
+          <option value="">Select student...</option>
+        </select>
+        <div id="err-studentId" class="field-error"></div>
+      </div>
+      <div class="field">
+        <label for="incidentDate">Incident Date</label>
+        <input id="incidentDate" name="incidentDate" type="date" required />
+        <div id="err-incidentDate" class="field-error"></div>
+      </div>
+      <div class="field">
+        <label for="fault">Fault</label>
+        <input id="fault" name="fault" required maxlength="100" />
+        <div id="err-fault" class="field-error"></div>
+      </div>
+      <div class="field">
+        <label for="description">Description</label>
+        <input id="description" name="description" maxlength="255" />
+        <div id="err-description" class="field-error"></div>
+      </div>
+      <div class="field">
+        <label for="punishment">Punishment</label>
+        <input id="punishment" name="punishment" required maxlength="150" />
+        <div id="err-punishment" class="field-error"></div>
+      </div>
+      <div class="field">
+        <label for="points">Points</label>
+        <input id="points" name="points" type="number" min="0" required />
+        <div id="err-points" class="field-error"></div>
+      </div>
+      <div class="field">
+        <label for="status">Status</label>
+        <select id="status" name="status" required>
+          <option value="Open">Open</option>
+          <option value="Resolved">Resolved</option>
+        </select>
+        <div id="err-status" class="field-error"></div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" id="cancel-btn" class="secondary">Cancel</button>
+        <button type="submit">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Delete confirmation -->
+<div id="delete-backdrop" class="modal-backdrop" style="display:none;">
+  <div class="modal">
+    <h2>Delete this record?</h2>
+    <p style="color:var(--text-dim); font-size:0.9rem;">This cannot be undone.</p>
+    <div class="modal-actions">
+      <button type="button" id="cancel-delete-btn" class="secondary">Cancel</button>
+      <button type="button" id="confirm-delete-btn" class="danger">Delete</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/discipline-records.js"></script>
+</body>
+</html>

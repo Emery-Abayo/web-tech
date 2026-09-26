@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Students — Wellbeing System</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<header>
+  <h1>Student Wellbeing System</h1>
+  <nav>
+    <a href="index.html">Dashboard</a>
+    <a href="students.html" class="active">Students</a>
+    <a href="discipline-records.html">Discipline Records</a>
+    <a href="wellbeing-records.html">Wellbeing Records</a>
+  </nav>
+</header>
+
+<main>
+  <div id="banner" class="banner" style="display:none;"></div>
+
+  <div class="toolbar">
+    <h2 style="margin:0;">Students</h2>
+    <button id="add-student-btn">+ Add Student</button>
+  </div>
+
+  <div id="state-box" style="display:none;"></div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th><th>Student #</th><th>Name</th><th>Class</th><th>Gender</th><th>Email</th><th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="student-rows"></tbody>
+  </table>
+</main>
+
+<!-- Create / Edit modal -->
+<div id="modal-backdrop" class="modal-backdrop" style="display:none;">
+  <div class="modal">
+    <h2 id="modal-title">Add Student</h2>
+    <form id="student-form" novalidate>
+      <div class="field">
+        <label for="studentNumber">Student Number</label>
+        <input id="studentNumber" name="studentNumber" required maxlength="20" />
+        <div id="err-studentNumber" class="field-error"></div>
+      </div>
+      <div class="field">
+        <label for="firstName">First Name</label>
+        <input id="firstName" name="firstName" required maxlength="50" />
+        <div id="err-firstName" class="field-error"></div>
+      </div>
+      <div class="field">
+        <label for="lastName">Last Name</label>
+        <input id="lastName" name="lastName" required maxlength="50" />
+        <div id="err-lastName" class="field-error"></div>
+      </div>
+      <div class="field">
+        <label for="gender">Gender</label>
+        <input id="gender" name="gender" maxlength="10" />
+        <div id="err-gender" class="field-error"></div>
+      </div>
+      <div class="field">
+        <label for="className">Class</label>
+        <input id="className" name="className" required maxlength="30" />
+        <div id="err-className" class="field-error"></div>
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" maxlength="100" />
+        <div id="err-email" class="field-error"></div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" id="cancel-btn" class="secondary">Cancel</button>
+        <button type="submit">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Delete confirmation -->
+<div id="delete-backdrop" class="modal-backdrop" style="display:none;">
+  <div class="modal">
+    <h2>Delete this student?</h2>
+    <p style="color:var(--text-dim); font-size:0.9rem;">
+      This cannot be undone. The backend will refuse if this student has discipline or wellbeing records.
+    </p>
+    <div class="modal-actions">
+      <button type="button" id="cancel-delete-btn" class="secondary">Cancel</button>
+      <button type="button" id="confirm-delete-btn" class="danger">Delete</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/students.js"></script>
+</body>
+</html>
